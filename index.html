@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confubeauty | Hair Dryer Collection</title>
+    <style>
+        /* Global Style Reset - Replicate Confubeauty Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth; /* 新增：平滑滚动 */
+            scroll-padding-top: 80px; /* 新增：锚点跳转偏移，避免被导航栏遮挡 */
+        }
+
+        body {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #fff;
+            position: relative; /* 新增：为返回顶部按钮定位 */
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            transition: all 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: inherit;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Top Toolbar - Replicate Confubeauty Top Bar */
+        .top-bar {
+            background-color: #f5f5f5;
+            padding: 8px 0;
+            font-size: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-bar-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .top-bar-right {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar a {
+            color: #666;
+        }
+
+        .top-bar a:hover {
+            color: #c8102e; /* Confubeauty Brand Red */
+            text-decoration: underline;
+        }
+
+        /* Header Navigation - Replicate Confubeauty Main Navigation */
+        .header-main {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            background-color: #fff; /* 新增：固定导航栏背景色 */
+            position: sticky; /* 新增：导航栏吸顶 */
+            top: 0;
+            z-index: 998;
+        }
+
+        .header-main .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #c8102e;
+        }
+
+        /* 新增：移动端汉堡菜单按钮 */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* Main Navigation Menu */
+        .main-nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav > li {
+            position: relative;
+        }
+
+        .main-nav > li > a {
+            font-size: 15px;
+            font-weight: 500;
+            padding: 8px 0;
+            display: block;
+        }
+
+        .main-nav > li > a:hover {
+            color: #c8102e;
+        }
+
+        /* Dropdown Menu - Replicate Confubeauty Secondary Navigation */
+        .main-nav .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 200px;
+            background: #fff;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .main-nav .dropdown li {
+            padding: 0 20px;
+        }
+
+        .main-nav .dropdown a {
+            display: block;
+            padding: 8px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .main-nav .dropdown a:hover {
+            color: #c8102e;
+            background-color: #f9f9f9;
+        }
+
+        .main-nav > li:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Search + Shopping Cart */
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-input {
+            width: 0;
+            padding: 8px 15px;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            outline: none;
+            transition: width 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .search-wrapper:hover .search-input {
+            width: 200px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            cursor: pointer;
+        }
+
+        .cart-icon {
+            font-size: 20px;
+            position: relative;
+            transition: transform 0.2s ease; /* 新增：购物车按钮动画 */
+        }
+
+        /* 新增：购物车按钮点击效果 */
+        .cart-icon:active {
+            transform: scale(0.9);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #c8102e;
+            color: #fff;
+            font-size: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Hero Section - Replicate Confubeauty Homepage Banner */
+        .hero-section {
+            background-color: #f9f9f9;
+            padding: 40px 0;
+            margin-bottom: 40px;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary {
+            background-color: #c8102e;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 15px;
+            transition: background-color 0.2s ease;
+            display: inline-block; /* 新增：确保按钮padding生效 */
+        }
+
+        .btn-primary:hover {
+            background-color: #a00c24;
+            transform: translateY(-2px); /* 新增：hover上浮效果 */
+            box-shadow: 0 4px 8px rgba(200, 16, 46, 0.2);
+        }
+
+        /* Category Navigation - Replicate Confubeauty Product Category Bar */
+        .category-nav {
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .category-list {
+            display: flex;
+            gap: 30px;
+            padding-bottom: 15px;
+            flex-wrap: wrap; /* 新增：移动端换行 */
+        }
+
+        .category-list li a {
+            font-size: 16px;
+            font-weight: 500;
+            padding-bottom: 15px;
+            border-bottom: 3px solid transparent;
+            display: inline-block; /* 新增：确保border生效 */
+        }
+
+        .category-list li a.active,
+        .category-list li a:hover {
+            color: #c8102e;
+            border-bottom-color: #c8102e;
+        }
+
+        /* Product Display Section - Replicate Confubeauty Product Cards */
+        .products-section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: #c8102e;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.3s ease; /* 优化：更全面的过渡效果 */
+            background-color: #fff;
+        }
+
+        /* 优化：产品卡片hover效果 */
+        .product-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            transform: translateY(-5px);
+            border-color: #ddd;
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease; /* 新增：图片hover放大 */
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+            background-color: #fff; /* 新增：确保背景色 */
+        }
+
+        .product-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            height: 45px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: #c8102e;
+            margin-bottom: 15px;
+        }
+
+        .btn-secondary {
+            display: block;
+            width: 100%;
+            padding: 10px 0;
+            text-align: center;
+            border: 1px solid #c8102e;
+            color: #c8102e;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: #c8102e;
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(200, 16, 46, 0.2);
+        }
+
+        /* Footer Section - Replicate Confubeauty Footer */
+        .footer {
+            background-color: #f5f5f5;
+            padding: 40px 0 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #666;
+        }
+
+        .footer-column a:hover {
+            color: #c8102e;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* 新增：声明文本样式优化 */
+        .footer-disclaimer {
+            margin-top: 10px;
+            line-height: 1.6;
+            color: #888;
+        }
+
+        /* 新增：返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #c8102e;
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: #a00c24;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Adaptation - Replicate Confubeauty Mobile Layout */
+        @media (max-width: 992px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-top {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            /* 新增：移动端显示汉堡菜单按钮 */
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .top-bar-left, .top-bar-right {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            /* 新增：移动端调整返回顶部按钮位置 */
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+            }
+
+            .category-list {
+                gap: 15px;
+            }
+
+            .category-list li a {
+                font-size: 14px;
+            }
+            
+            /* 移动端适配声明文本 */
+            .footer-disclaimer {
+                font-size: 10px;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Toolbar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-bar-left">
+                <a href="#">Free Shipping | Orders Over $50</a>
+                <a href="#">Return & Exchange Policy</a>
+            </div>
+            <div class="top-bar-right">
+                <a href="#">My Account</a>
+                <a href="#">Help Center</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header Navigation -->
+    <header class="header-main">
+        <div class="container">
+            <a href="#" class="logo">CONF<span>UBE</span>AUTY</a>
+            
+            <!-- 新增：移动端汉堡菜单按钮 -->
+            <button class="mobile-menu-btn">☰</button>
+            
+            <ul class="main-nav">
+                <li>
+                    <a href="#">Hair Dryers</a>
+                    <ul class="dropdown">
+                        <li><a href="#home-use">High Power for Home Use</a></li>
+                        <li><a href="#portable">Portable Foldable</a></li>
+                        <li><a href="#negative-ion">Negative Ion Hair Care</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Hair Styling Tools</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Curling Irons</a></li>
+                        <li><a href="#">Flat Irons</a></li>
+                        <li><a href="#">Styling Brushes</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">New Arrivals</a></li>
+                <li><a href="#">Best Sellers</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+
+            <div class="header-actions">
+                <div class="search-wrapper">
+                    <input type="text" class="search-input" placeholder="Search Hair Dryers...">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <a href="#" class="cart-icon" id="cartBtn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Professional Hair Care Starts with Confubeauty</h1>
+                <p class="hero-subtitle">Premium Hair Dryer Collection | Fast Drying & Long-Lasting Styling</p>
+                <a href="#products" class="btn-primary">Explore All Hair Dryers</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Navigation -->
+    <nav class="category-nav">
+        <div class="container">
+            <ul class="category-list">
+                <li><a href="#home-use" class="active">High Power for Home Use</a></li>
+                <li><a href="#portable">Portable Foldable</a></li>
+                <li><a href="#negative-ion">Negative Ion Hair Care</a></li>
+                <li><a href="#">Professional Salon Grade</a></li>
+                <li><a href="#">Kids Special Edition</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Product Display Section -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <h2 class="section-title" id="home-use">High Power Hair Dryers for Home Use</h2>
+            <div class="product-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=1" alt="Constant Temperature Quick Dry Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Constant Temperature Quick Dry Hair Dryer</h3>
+                        <p class="product-desc">2200W high power, 5-speed wind adjustment, hot & cold air circulation, suitable for family use</p>
+                        <div class="product-price">$59.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=2" alt="Quiet Home Negative Ion Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Quiet Home Negative Ion Hair Dryer</h3>
+                        <p class="product-desc">Low noise design, negative ion hair care, removable filter, easy to clean and maintain</p>
+                        <div class="product-price">$69.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=3" alt="Smart Temperature Control Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Smart Temperature Control Hair Dryer</h3>
+                        <p class="product-desc">Smart temperature sensing, 6 modes, blue light hair care, high power quick dry without damage</p>
+                        <div class="product-price">$79.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=4" alt="High Power Hot & Cold Air Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">High Power Hot & Cold Air Hair Dryer</h3>
+                        <p class="product-desc">2400W super wind power, fast drying, 3-speed hot & cold air, non-slip handle design</p>
+                        <div class="product-price">$49.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" id="portable" style="margin-top: 60px;">Portable Foldable Hair Dryers</h2>
+            <div class="product-grid">
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=5" alt="Mini Foldable Travel Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Mini Foldable Travel Hair Dryer</h3>
+                        <p class="product-desc">Foldable handle, compact and portable, compatible with multi-country voltage, ideal for travel</p>
+                        <div class="product-price">$29.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=6" alt="Wireless Charging Portable Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Wireless Charging Portable Hair Dryer</h3>
+                        <p class="product-desc">Wireless use, Type-C charging, 3-hour battery life, no cable constraints</p>
+                        <div class="product-price">$45.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 7 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=7" alt="Pocket Portable Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Pocket Portable Hair Dryer</h3>
+                        <p class="product-desc">Ultra-light design (only 200g), palm-sized when folded, USB charging, for emergency use</p>
+                        <div class="product-price">$35.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 8 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=8" alt="Foldable Constant Temperature Portable Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Foldable Constant Temperature Portable Hair Dryer</h3>
+                        <p class="product-desc">Constant temperature hair care, foldable storage, 110-240V global voltage, travel essential</p>
+                        <div class="product-price">$39.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" id="negative-ion" style="margin-top: 60px;">Negative Ion Hair Care Hair Dryers</h2>
+            <div class="product-grid">
+                <!-- Product Card 9 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=9" alt="High Speed Negative Ion Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">High Speed Negative Ion Hair Dryer</h3>
+                        <p class="product-desc">110,000 RPM high-speed motor, alternating hot & cold air, hair care without damage, quick dry & nourish</p>
+                        <div class="product-price">$89.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 10 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=10" alt="Collagen Negative Ion Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Collagen Negative Ion Hair Dryer</h3>
+                        <p class="product-desc">Dual hair care with collagen & negative ions, smart temperature control, suitable for all hair types</p>
+                        <div class="product-price">$99.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 11 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=11" alt="Nano Negative Ion Hair Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Nano Negative Ion Hair Dryer</h3>
+                        <p class="product-desc">Nano-level negative ions, deep hair nourishment, reduce frizz, long-lasting smoothness</p>
+                        <div class="product-price">$85.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <!-- Product Card 12 -->
+                <div class="product-card">
+                    <img src="https://picsum.photos/300/250?random=12" alt="Water Ion Hair Care Dryer" class="product-img">
+                    <div class="product-info">
+                        <h3 class="product-name">Water Ion Hair Care Dryer</h3>
+                        <p class="product-desc">Double effect hair care with water ions & negative ions, lock in moisture, improve dry and frizzy hair</p>
+                        <div class="product-price">$95.99</div>
+                        <a href="#" class="btn-secondary add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h4>Shopping Guide</h4>
+                    <ul>
+                        <li><a href="#">How to Shop</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>About Confubeauty</h4>
+                    <ul>
+                        <li><a href="#">Brand Story</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Product Support</h4>
+                    <ul>
+                        <li><a href="#">User Manuals</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Warranty Policy</a></li>
+                        <li><a href="#">Repair Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">YouTube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Confubeauty Corporation. All rights reserved. | Hair Dryer Collection - Replica Edition</p>
+                <!-- 新增的声明文本 -->
+                <p class="footer-disclaimer"><small>本页面仅为域名 <strong>confubeauty.com</strong> 的潜在应用概念演示。与实际品牌Confu无任何关联。其所有商标与知识产权归属原权利方所有。</small></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 新增：返回顶部按钮 -->
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script>
+        // 新增：返回顶部按钮逻辑
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', function() {
+            // 滚动超过300px时显示返回顶部按钮
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+            
+            // 高亮当前分类导航
+            highlightActiveCategory();
+        });
+
+        // 新增：购物车按钮点击逻辑
+        const cartBtn = document.getElementById('cartBtn');
+        const addToCartBtns = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        
+        // 加入购物车按钮点击事件
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                // 更新购物车数量
+                let count = parseInt(cartCount.textContent);
+                cartCount.textContent = count + 1;
+                // 按钮反馈
+                this.textContent = 'Added!';
+                this.style.backgroundColor = '#a00c24';
+                // 2秒后恢复
+                setTimeout(() => {
+                    this.textContent = 'Add to Cart';
+                    this.style.backgroundColor = '';
+                }, 2000);
+            });
+        });
+
+        // 购物车图标点击事件
+        cartBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Shopping cart functionality will be implemented soon!');
+        });
+
+        // 新增：高亮当前滚动位置对应的分类导航
+        function highlightActiveCategory() {
+            const sections = ['home-use', 'portable', 'negative-ion'];
+            const navLinks = document.querySelectorAll('.category-list li a');
+            
+            sections.forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                const rect = section.getBoundingClientRect();
+                
+                // 当section进入视口时高亮对应的导航
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // 初始化执行一次
+        highlightActiveCategory();
+    </script>
+</body>
+</html>
