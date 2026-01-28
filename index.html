@@ -14,8 +14,8 @@
         }
 
         html {
-            scroll-behavior: smooth; /* 新增：平滑滚动 */
-            scroll-padding-top: 80px; /* 新增：锚点跳转偏移，避免被导航栏遮挡 */
+            scroll-behavior: smooth; /* 平滑滚动 */
+            scroll-padding-top: 80px; /* 锚点跳转偏移，避免被导航栏遮挡 */
         }
 
         body {
@@ -23,7 +23,7 @@
             font-size: 14px;
             line-height: 1.5;
             background-color: #fff;
-            position: relative; /* 新增：为返回顶部按钮定位 */
+            position: relative; /* 为返回顶部按钮定位 */
         }
 
         a {
@@ -86,10 +86,11 @@
         .header-main {
             padding: 15px 0;
             border-bottom: 1px solid #eee;
-            background-color: #fff; /* 新增：固定导航栏背景色 */
-            position: sticky; /* 新增：导航栏吸顶 */
+            background-color: #fff; /* 固定导航栏背景色 */
+            position: sticky; /* 导航栏吸顶 */
             top: 0;
             z-index: 998;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* 新增：导航栏轻微阴影，提升层次感 */
         }
 
         .header-main .container {
@@ -105,11 +106,12 @@
             letter-spacing: -1px;
         }
 
+        /* 修改：将confu标红，而非ube */
         .logo span {
             color: #c8102e;
         }
 
-        /* 新增：移动端汉堡菜单按钮 */
+        /* 移动端汉堡菜单按钮 */
         .mobile-menu-btn {
             display: none;
             font-size: 24px;
@@ -214,10 +216,10 @@
         .cart-icon {
             font-size: 20px;
             position: relative;
-            transition: transform 0.2s ease; /* 新增：购物车按钮动画 */
+            transition: transform 0.2s ease; /* 购物车按钮动画 */
         }
 
-        /* 新增：购物车按钮点击效果 */
+        /* 购物车按钮点击效果 */
         .cart-icon:active {
             transform: scale(0.9);
         }
@@ -237,58 +239,90 @@
             justify-content: center;
         }
 
-        /* Hero Section - Replicate Confubeauty Homepage Banner */
+        /* Hero Section - 核心优化：添加背景图+视觉增强 */
         .hero-section {
-            background-color: #f9f9f9;
-            padding: 40px 0;
+            /* 背景图配置 - 替换为你自己的图片链接即可 */
+            background-image: url('https://picsum.photos/1920/600?random=100');
+            background-size: cover;         /* 覆盖整个区域 */
+            background-position: center;    /* 居中显示 */
+            background-repeat: no-repeat;   /* 禁止重复 */
+            background-attachment: fixed;   /* 视差滚动效果 */
+            padding: 100px 0;               /* 增加内边距，提升视觉占比 */
             margin-bottom: 40px;
+            position: relative;
+        }
+
+        /* 背景暗化层 - 提升文字可读性 */
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.2); /* 黑色半透明，可调整透明度 */
+            z-index: 1;
         }
 
         .hero-content {
             text-align: center;
+            position: relative;
+            z-index: 2; /* 确保文字在暗化层上方 */
+            /* 修改：降低背景透明度，从0.9改为0.7，让底部图片更清晰显示 */
+            background-color: rgba(255, 255, 255, 0.7); 
+            padding: 40px 30px;
+            border-radius: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .hero-title {
-            font-size: 36px;
+            font-size: 42px; /* 增大标题字号 */
             font-weight: 700;
             margin-bottom: 15px;
             color: #333;
+            line-height: 1.2; /* 优化行高 */
         }
 
         .hero-subtitle {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 25px;
+            font-size: 20px; /* 增大副标题字号 */
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.4;
         }
 
         .btn-primary {
             background-color: #c8102e;
             color: #fff;
-            padding: 12px 25px;
-            border-radius: 4px;
+            padding: 14px 30px; /* 增大按钮尺寸 */
+            border-radius: 6px;
             font-weight: 500;
-            font-size: 15px;
-            transition: background-color 0.2s ease;
-            display: inline-block; /* 新增：确保按钮padding生效 */
+            font-size: 16px;
+            transition: all 0.3s ease; /* 更全面的过渡 */
+            display: inline-block;
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.2);
         }
 
         .btn-primary:hover {
             background-color: #a00c24;
-            transform: translateY(-2px); /* 新增：hover上浮效果 */
-            box-shadow: 0 4px 8px rgba(200, 16, 46, 0.2);
+            transform: translateY(-3px); /* 上浮效果增强 */
+            box-shadow: 0 6px 18px rgba(200, 16, 46, 0.3);
         }
 
-        /* Category Navigation - Replicate Confubeauty Product Category Bar */
+        /* Category Navigation - 优化交互 */
         .category-nav {
             margin-bottom: 40px;
             border-bottom: 1px solid #eee;
+            background-color: #fff; /* 增加背景色，提升层次感 */
+            padding: 10px 0;
         }
 
         .category-list {
             display: flex;
             gap: 30px;
             padding-bottom: 15px;
-            flex-wrap: wrap; /* 新增：移动端换行 */
+            flex-wrap: wrap; /* 移动端换行 */
         }
 
         .category-list li a {
@@ -296,27 +330,46 @@
             font-weight: 500;
             padding-bottom: 15px;
             border-bottom: 3px solid transparent;
-            display: inline-block; /* 新增：确保border生效 */
+            display: inline-block;
+            position: relative;
+        }
+
+        /* 新增：导航下划线动画 */
+        .category-list li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: #c8102e;
+            transition: width 0.3s ease;
         }
 
         .category-list li a.active,
         .category-list li a:hover {
             color: #c8102e;
-            border-bottom-color: #c8102e;
+            border-bottom-color: transparent; /* 隐藏原有边框 */
         }
 
-        /* Product Display Section - Replicate Confubeauty Product Cards */
+        .category-list li a.active::after,
+        .category-list li a:hover::after {
+            width: 100%; /* 下划线展开动画 */
+        }
+
+        /* Product Display Section - 优化视觉和交互 */
         .products-section {
             margin-bottom: 60px;
+            padding: 20px 0;
         }
 
         .section-title {
-            font-size: 28px;
+            font-size: 32px; /* 增大标题字号 */
             font-weight: 700;
             margin-bottom: 30px;
             color: #333;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
         }
 
         .section-title::after {
@@ -324,9 +377,10 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
-            height: 3px;
+            width: 60px;
+            height: 4px; /* 加粗下划线 */
             background-color: #c8102e;
+            border-radius: 2px;
         }
 
         .product-grid {
@@ -337,17 +391,38 @@
 
         .product-card {
             border: 1px solid #eee;
-            border-radius: 4px;
+            border-radius: 8px; /* 增大圆角 */
             overflow: hidden;
-            transition: all 0.3s ease; /* 优化：更全面的过渡效果 */
+            transition: all 0.4s ease; /* 更顺滑的过渡 */
             background-color: #fff;
+            position: relative;
         }
 
-        /* 优化：产品卡片hover效果 */
+        /* 产品卡片hover效果增强 */
         .product-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
             border-color: #ddd;
+        }
+
+        /* 新增：产品卡片上新/热销标签（示例） */
+        .product-card::before {
+            content: 'Hot';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #c8102e;
+            color: #fff;
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
         }
 
         .product-img {
@@ -355,21 +430,21 @@
             height: 250px;
             object-fit: cover;
             display: block;
-            transition: transform 0.3s ease; /* 新增：图片hover放大 */
+            transition: transform 0.5s ease; /* 更慢的放大动画 */
         }
 
         .product-card:hover .product-img {
-            transform: scale(1.05);
+            transform: scale(1.08); /* 放大比例增强 */
         }
 
         .product-info {
             padding: 20px;
-            background-color: #fff; /* 新增：确保背景色 */
+            background-color: #fff;
         }
 
         .product-name {
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 600; /* 加粗产品名 */
             margin-bottom: 10px;
             height: 40px;
             overflow: hidden;
@@ -384,7 +459,7 @@
         }
 
         .product-price {
-            font-size: 18px;
+            font-size: 20px; /* 增大价格字号 */
             font-weight: 700;
             color: #c8102e;
             margin-bottom: 15px;
@@ -393,89 +468,105 @@
         .btn-secondary {
             display: block;
             width: 100%;
-            padding: 10px 0;
+            padding: 12px 0; /* 增大按钮内边距 */
             text-align: center;
             border: 1px solid #c8102e;
             color: #c8102e;
-            border-radius: 4px;
+            border-radius: 6px; /* 增大圆角 */
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .btn-secondary:hover {
             background-color: #c8102e;
             color: #fff;
-            box-shadow: 0 2px 8px rgba(200, 16, 46, 0.2);
+            box-shadow: 0 4px 12px rgba(200, 16, 46, 0.2);
+            transform: translateY(-2px);
         }
 
-        /* Footer Section - Replicate Confubeauty Footer */
+        /* Footer Section - 优化视觉 */
         .footer {
-            background-color: #f5f5f5;
-            padding: 40px 0 20px;
+            background-color: #f8f8f8; /* 更柔和的背景色 */
+            padding: 60px 0 30px; /* 增加顶部内边距 */
             border-top: 1px solid #eee;
         }
 
         .footer-top {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            gap: 40px; /* 增大列间距 */
             margin-bottom: 40px;
         }
 
         .footer-column h4 {
-            font-size: 16px;
+            font-size: 18px; /* 增大标题字号 */
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        /* 新增：footer标题下划线 */
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #c8102e;
         }
 
         .footer-column ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-column a {
             color: #666;
+            transition: all 0.2s ease;
         }
 
         .footer-column a:hover {
             color: #c8102e;
             text-decoration: underline;
+            padding-left: 5px; /* 新增：hover偏移效果 */
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid #eee;
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
         }
         
-        /* 新增：声明文本样式优化 */
+        /* 声明文本样式优化 */
         .footer-disclaimer {
-            margin-top: 10px;
-            line-height: 1.6;
+            margin-top: 15px;
+            line-height: 1.8;
             color: #888;
         }
 
-        /* 新增：返回顶部按钮 */
+        /* 返回顶部按钮 - 优化样式 */
         .back-to-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background-color: #c8102e;
             color: #fff;
-            width: 45px;
-            height: 45px;
+            width: 50px; /* 增大尺寸 */
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 22px;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
         }
 
         .back-to-top.visible {
@@ -485,10 +576,11 @@
 
         .back-to-top:hover {
             background-color: #a00c24;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(200, 16, 46, 0.4);
         }
 
-        /* Responsive Adaptation - Replicate Confubeauty Mobile Layout */
+        /* Responsive Adaptation - 增强移动端适配 */
         @media (max-width: 992px) {
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -502,9 +594,23 @@
                 display: none;
             }
 
-            /* 新增：移动端显示汉堡菜单按钮 */
+            /* 移动端显示汉堡菜单按钮 */
             .mobile-menu-btn {
                 display: block;
+            }
+
+            /* 移动端英雄区适配 */
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-content {
+                padding: 30px 20px;
+                margin: 0 15px;
             }
         }
 
@@ -522,16 +628,31 @@
                 gap: 5px;
             }
 
-            .hero-title {
-                font-size: 28px;
+            .hero-section {
+                padding: 80px 0; /* 减小移动端内边距 */
+                background-attachment: scroll; /* 取消移动端视差效果 */
             }
 
-            /* 新增：移动端调整返回顶部按钮位置 */
+            .hero-title {
+                font-size: 26px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .btn-primary {
+                padding: 12px 25px;
+                font-size: 15px;
+            }
+
+            /* 移动端调整返回顶部按钮位置 */
             .back-to-top {
                 bottom: 20px;
                 right: 20px;
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
             }
 
             .category-list {
@@ -544,8 +665,12 @@
             
             /* 移动端适配声明文本 */
             .footer-disclaimer {
-                font-size: 10px;
+                font-size: 11px;
                 padding: 0 10px;
+            }
+
+            .section-title {
+                font-size: 26px;
             }
         }
     </style>
@@ -569,9 +694,10 @@
     <!-- Main Header Navigation -->
     <header class="header-main">
         <div class="container">
-            <a href="#" class="logo">CONF<span>UBE</span>AUTY</a>
+            <!-- 修改：将confu标红，原先是ube标红 -->
+            <a href="#" class="logo"><span>CONFU</span>BEAUTY</a>
             
-            <!-- 新增：移动端汉堡菜单按钮 -->
+            <!-- 移动端汉堡菜单按钮 -->
             <button class="mobile-menu-btn">☰</button>
             
             <ul class="main-nav">
@@ -609,7 +735,7 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - 已添加背景图+视觉优化 -->
     <section class="hero-section">
         <div class="container">
             <div class="hero-content">
@@ -770,126 +896,41 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-top">
-                <div class="footer-column">
-                    <h4>Shopping Guide</h4>
-                    <ul>
-                        <li><a href="#">How to Shop</a></li>
-                        <li><a href="#">Payment Methods</a></li>
-                        <li><a href="#">Delivery Information</a></li>
-                        <li><a href="#">Return Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>About Confubeauty</h4>
-                    <ul>
-                        <li><a href="#">Brand Story</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Careers</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Product Support</h4>
-                    <ul>
-                        <li><a href="#">User Manuals</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Warranty Policy</a></li>
-                        <li><a href="#">Repair Services</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h4>Follow Us</h4>
-                    <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Instagram</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">YouTube</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2026 Confubeauty Corporation. All rights reserved. | Hair Dryer Collection - Replica Edition</p>
-                <!-- 新增的声明文本 -->
-                <p class="footer-disclaimer"><small>本页面仅为域名 <strong>confubeauty.com</strong> 的潜在应用概念演示。与实际品牌Confu无任何关联。其所有商标与知识产权归属原权利方所有。</small></p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- 新增：返回顶部按钮 -->
+    <!-- 返回顶部按钮 -->
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script>
-        // 新增：返回顶部按钮逻辑
+        // 返回顶部按钮逻辑
         const backToTopBtn = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', function() {
-            // 滚动超过300px时显示返回顶部按钮
+        window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 backToTopBtn.classList.add('visible');
             } else {
                 backToTopBtn.classList.remove('visible');
             }
-            
-            // 高亮当前分类导航
-            highlightActiveCategory();
         });
 
-        // 新增：购物车按钮点击逻辑
-        const cartBtn = document.getElementById('cartBtn');
+        // 购物车计数逻辑
         const addToCartBtns = document.querySelectorAll('.add-to-cart');
         const cartCount = document.querySelector('.cart-count');
-        
-        // 加入购物车按钮点击事件
+        let count = 0;
+
         addToCartBtns.forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            btn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // 更新购物车数量
-                let count = parseInt(cartCount.textContent);
-                cartCount.textContent = count + 1;
-                // 按钮反馈
-                this.textContent = 'Added!';
-                this.style.backgroundColor = '#a00c24';
-                // 2秒后恢复
+                count++;
+                cartCount.textContent = count;
+                // 添加购物车动画效果
+                btn.textContent = 'Added!';
+                btn.style.backgroundColor = '#a00c24';
+                btn.style.color = '#fff';
                 setTimeout(() => {
-                    this.textContent = 'Add to Cart';
-                    this.style.backgroundColor = '';
-                }, 2000);
+                    btn.textContent = 'Add to Cart';
+                    btn.style.backgroundColor = '';
+                    btn.style.color = '';
+                }, 1500);
             });
         });
-
-        // 购物车图标点击事件
-        cartBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Shopping cart functionality will be implemented soon!');
-        });
-
-        // 新增：高亮当前滚动位置对应的分类导航
-        function highlightActiveCategory() {
-            const sections = ['home-use', 'portable', 'negative-ion'];
-            const navLinks = document.querySelectorAll('.category-list li a');
-            
-            sections.forEach(sectionId => {
-                const section = document.getElementById(sectionId);
-                const rect = section.getBoundingClientRect();
-                
-                // 当section进入视口时高亮对应的导航
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        }
-
-        // 初始化执行一次
-        highlightActiveCategory();
     </script>
 </body>
 </html>
